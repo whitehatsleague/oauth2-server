@@ -9,10 +9,10 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server;
+namespace Whitehatsleague\OAuth2\Server;
 
-use League\OAuth2\Server\Grant\GrantTypeInterface;
-use League\OAuth2\Server\TokenType\Bearer;
+use Whitehatsleague\OAuth2\Server\Grant\GrantTypeInterface;
+use Whitehatsleague\OAuth2\Server\TokenType\Bearer;
 
 /**
  * OAuth 2.0 authorization server class

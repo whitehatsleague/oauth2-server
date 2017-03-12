@@ -9,7 +9,7 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Util;
+namespace Whitehatsleague\OAuth2\Server\Util;
 
 /**
  * RedirectUri class

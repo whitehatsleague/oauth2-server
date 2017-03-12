@@ -10,9 +10,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\TokenType;
+namespace Whitehatsleague\OAuth2\Server\TokenType;
 
-use League\OAuth2\Server\Util\SecureKey;
+use Whitehatsleague\OAuth2\Server\Util\SecureKey;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 

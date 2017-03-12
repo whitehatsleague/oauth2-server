@@ -9,10 +9,10 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Entity;
+namespace Whitehatsleague\OAuth2\Server\Entity;
 
-use League\OAuth2\Server\AbstractServer;
-use League\OAuth2\Server\Event\SessionOwnerEvent;
+use Whitehatsleague\OAuth2\Server\AbstractServer;
+use Whitehatsleague\OAuth2\Server\Event\SessionOwnerEvent;
 
 /**
  * Session entity grant
@@ -29,7 +29,7 @@ class SessionEntity
     /**
      * Client identifier
      *
-     * @var \League\OAuth2\Server\Entity\ClientEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\ClientEntity
      */
     protected $client;
 
@@ -50,21 +50,21 @@ class SessionEntity
     /**
      * Auth code
      *
-     * @var \League\OAuth2\Server\Entity\AuthCodeEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity
      */
     protected $authCode;
 
     /**
      * Access token
      *
-     * @var \League\OAuth2\Server\Entity\AccessTokenEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\AccessTokenEntity
      */
     protected $accessToken;
 
     /**
      * Refresh token
      *
-     * @var \League\OAuth2\Server\Entity\RefreshTokenEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity
      */
     protected $refreshToken;
 
@@ -78,14 +78,14 @@ class SessionEntity
     /**
      * Authorization or resource server
      *
-     * @var \League\OAuth2\Server\AuthorizationServer|\League\OAuth2\Server\ResourceServer
+     * @var \Whitehatsleague\OAuth2\Server\AuthorizationServer|\Whitehatsleague\OAuth2\Server\ResourceServer
      */
     protected $server;
 
     /**
      * __construct
      *
-     * @param \League\OAuth2\Server\AbstractServer $server
+     * @param \Whitehatsleague\OAuth2\Server\AbstractServer $server
      *
      * @return self
      */
@@ -123,7 +123,7 @@ class SessionEntity
     /**
      * Associate a scope
      *
-     * @param \League\OAuth2\Server\Entity\ScopeEntity $scope
+     * @param \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity $scope
      *
      * @return self
      */
@@ -155,7 +155,7 @@ class SessionEntity
     /**
      * Return all scopes associated with the session
      *
-     * @return \League\OAuth2\Server\Entity\ScopeEntity[]
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[]
      */
     public function getScopes()
     {
@@ -169,7 +169,7 @@ class SessionEntity
     /**
      * Format the local scopes array
      *
-     * @param  \League\OAuth2\Server\Entity\Scope[]
+     * @param  \Whitehatsleague\OAuth2\Server\Entity\Scope[]
      *
      * @return array
      */
@@ -190,7 +190,7 @@ class SessionEntity
     /**
      * Associate an access token with the session
      *
-     * @param \League\OAuth2\Server\Entity\AccessTokenEntity $accessToken
+     * @param \Whitehatsleague\OAuth2\Server\Entity\AccessTokenEntity $accessToken
      *
      * @return self
      */
@@ -204,7 +204,7 @@ class SessionEntity
     /**
      * Associate a refresh token with the session
      *
-     * @param \League\OAuth2\Server\Entity\RefreshTokenEntity $refreshToken
+     * @param \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity $refreshToken
      *
      * @return self
      */
@@ -218,7 +218,7 @@ class SessionEntity
     /**
      * Associate a client with the session
      *
-     * @param \League\OAuth2\Server\Entity\ClientEntity $client The client
+     * @param \Whitehatsleague\OAuth2\Server\Entity\ClientEntity $client The client
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class SessionEntity
     /**
      * Return the session client
      *
-     * @return \League\OAuth2\Server\Entity\ClientEntity
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ClientEntity
      */
     public function getClient()
     {

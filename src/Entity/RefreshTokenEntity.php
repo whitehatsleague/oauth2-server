@@ -9,7 +9,7 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Entity;
+namespace Whitehatsleague\OAuth2\Server\Entity;
 
 /**
  * Refresh token entity class
@@ -19,7 +19,7 @@ class RefreshTokenEntity extends AbstractTokenEntity
     /**
      * Access token associated to refresh token
      *
-     * @var \League\OAuth2\Server\Entity\AccessTokenEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\AccessTokenEntity
      */
     protected $accessTokenEntity;
 
@@ -47,7 +47,7 @@ class RefreshTokenEntity extends AbstractTokenEntity
     /**
      * Associate an access token
      *
-     * @param \League\OAuth2\Server\Entity\AccessTokenEntity $accessTokenEntity
+     * @param \Whitehatsleague\OAuth2\Server\Entity\AccessTokenEntity $accessTokenEntity
      *
      * @return self
      */

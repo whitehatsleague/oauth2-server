@@ -9,7 +9,7 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Event;
+namespace Whitehatsleague\OAuth2\Server\Event;
 
 use League\Event\AbstractEvent;
 use Symfony\Component\HttpFoundation\Request;

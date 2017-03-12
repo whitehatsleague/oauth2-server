@@ -9,9 +9,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Entity;
+namespace Whitehatsleague\OAuth2\Server\Entity;
 
-use League\OAuth2\Server\AbstractServer;
+use Whitehatsleague\OAuth2\Server\AbstractServer;
 
 /**
  * Scope entity class
@@ -37,14 +37,14 @@ class ScopeEntity implements \JsonSerializable
     /**
      * Authorization or resource server
      *
-     * @var \League\OAuth2\Server\AbstractServer
+     * @var \Whitehatsleague\OAuth2\Server\AbstractServer
      */
     protected $server;
 
     /**
      * __construct
      *
-     * @param \League\OAuth2\Server\AbstractServer $server
+     * @param \Whitehatsleague\OAuth2\Server\AbstractServer $server
      *
      * @return self
      */

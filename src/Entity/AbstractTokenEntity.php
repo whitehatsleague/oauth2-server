@@ -9,10 +9,10 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Entity;
+namespace Whitehatsleague\OAuth2\Server\Entity;
 
-use League\OAuth2\Server\AbstractServer;
-use League\OAuth2\Server\Util\SecureKey;
+use Whitehatsleague\OAuth2\Server\AbstractServer;
+use Whitehatsleague\OAuth2\Server\Util\SecureKey;
 
 /**
  * Abstract token class
@@ -29,14 +29,14 @@ abstract class AbstractTokenEntity
     /**
      * Associated session
      *
-     * @var \League\OAuth2\Server\Entity\SessionEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\SessionEntity
      */
     protected $session;
 
     /**
      * Session scopes
      *
-     * @var \League\OAuth2\Server\Entity\ScopeEntity[]
+     * @var \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[]
      */
     protected $scopes;
 
@@ -50,14 +50,14 @@ abstract class AbstractTokenEntity
     /**
      * Authorization or resource server
      *
-     * @var \League\OAuth2\Server\AbstractServer
+     * @var \Whitehatsleague\OAuth2\Server\AbstractServer
      */
     protected $server;
 
     /**
      * __construct
      *
-     * @param \League\OAuth2\Server\AbstractServer $server
+     * @param \Whitehatsleague\OAuth2\Server\AbstractServer $server
      *
      * @return self
      */
@@ -71,7 +71,7 @@ abstract class AbstractTokenEntity
     /**
      * Set session
      *
-     * @param \League\OAuth2\Server\Entity\SessionEntity $session
+     * @param \Whitehatsleague\OAuth2\Server\Entity\SessionEntity $session
      *
      * @return self
      */
@@ -143,7 +143,7 @@ abstract class AbstractTokenEntity
     /**
      * Associate a scope
      *
-     * @param \League\OAuth2\Server\Entity\ScopeEntity $scope
+     * @param \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity $scope
      *
      * @return self
      */
@@ -159,7 +159,7 @@ abstract class AbstractTokenEntity
     /**
      * Format the local scopes array
      *
-     * @param  \League\OAuth2\Server\Entity\ScopeEntity[]
+     * @param  \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[]
      *
      * @return array
      */

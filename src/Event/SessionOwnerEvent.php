@@ -9,24 +9,24 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Event;
+namespace Whitehatsleague\OAuth2\Server\Event;
 
 use League\Event\AbstractEvent;
-use League\OAuth2\Server\Entity\SessionEntity;
+use Whitehatsleague\OAuth2\Server\Entity\SessionEntity;
 
 class SessionOwnerEvent extends AbstractEvent
 {
     /**
      * Session entity
      *
-     * @var \League\OAuth2\Server\Entity\SessionEntity
+     * @var \Whitehatsleague\OAuth2\Server\Entity\SessionEntity
      */
     private $session;
 
     /**
      * Init the event with a session
      *
-     * @param \League\OAuth2\Server\Entity\SessionEntity $session
+     * @param \Whitehatsleague\OAuth2\Server\Entity\SessionEntity $session
      */
     public function __construct(SessionEntity $session)
     {
@@ -46,7 +46,7 @@ class SessionOwnerEvent extends AbstractEvent
     /**
      * Return session
      *
-     * @return \League\OAuth2\Server\Entity\SessionEntity
+     * @return \Whitehatsleague\OAuth2\Server\Entity\SessionEntity
      */
     public function getSession()
     {

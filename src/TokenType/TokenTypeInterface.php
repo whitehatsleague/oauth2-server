@@ -9,10 +9,10 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\TokenType;
+namespace Whitehatsleague\OAuth2\Server\TokenType;
 
-use League\OAuth2\Server\AbstractServer;
-use League\OAuth2\Server\Entity\SessionEntity;
+use Whitehatsleague\OAuth2\Server\AbstractServer;
+use Whitehatsleague\OAuth2\Server\Entity\SessionEntity;
 use Symfony\Component\HttpFoundation\Request;
 
 interface TokenTypeInterface
@@ -27,7 +27,7 @@ interface TokenTypeInterface
     /**
      * Set the server
      *
-     * @param \League\OAuth2\Server\AbstractServer $server
+     * @param \Whitehatsleague\OAuth2\Server\AbstractServer $server
      *
      * @return self
      */
@@ -51,7 +51,7 @@ interface TokenTypeInterface
     public function getParam($key);
 
     /**
-     * @param \League\OAuth2\Server\Entity\SessionEntity $session
+     * @param \Whitehatsleague\OAuth2\Server\Entity\SessionEntity $session
      *
      * @return self
      */

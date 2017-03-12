@@ -9,7 +9,7 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Entity;
+namespace Whitehatsleague\OAuth2\Server\Entity;
 
 /**
  * Auth Code entity class
@@ -69,7 +69,7 @@ class AuthCodeEntity extends AbstractTokenEntity
     /**
      * Get session
      *
-     * @return \League\OAuth2\Server\Entity\SessionEntity
+     * @return \Whitehatsleague\OAuth2\Server\Entity\SessionEntity
      */
     public function getSession()
     {
@@ -85,7 +85,7 @@ class AuthCodeEntity extends AbstractTokenEntity
     /**
      * Return all scopes associated with the session
      *
-     * @return \League\OAuth2\Server\Entity\ScopeEntity[]
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[]
      */
     public function getScopes()
     {

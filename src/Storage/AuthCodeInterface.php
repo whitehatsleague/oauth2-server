@@ -9,10 +9,10 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Storage;
+namespace Whitehatsleague\OAuth2\Server\Storage;
 
-use League\OAuth2\Server\Entity\AuthCodeEntity;
-use League\OAuth2\Server\Entity\ScopeEntity;
+use Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity;
+use Whitehatsleague\OAuth2\Server\Entity\ScopeEntity;
 
 /**
  * Auth code storage interface
@@ -24,7 +24,7 @@ interface AuthCodeInterface extends StorageInterface
      *
      * @param string $code
      *
-     * @return \League\OAuth2\Server\Entity\AuthCodeEntity | null
+     * @return \Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity | null
      */
     public function get($code);
 
@@ -43,17 +43,17 @@ interface AuthCodeInterface extends StorageInterface
     /**
      * Get the scopes for an access token
      *
-     * @param \League\OAuth2\Server\Entity\AuthCodeEntity $token The auth code
+     * @param \Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity $token The auth code
      *
-     * @return \League\OAuth2\Server\Entity\ScopeEntity[] Array of \League\OAuth2\Server\Entity\ScopeEntity
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[] Array of \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity
      */
     public function getScopes(AuthCodeEntity $token);
 
     /**
      * Associate a scope with an acess token
      *
-     * @param \League\OAuth2\Server\Entity\AuthCodeEntity $token The auth code
-     * @param \League\OAuth2\Server\Entity\ScopeEntity    $scope The scope
+     * @param \Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity $token The auth code
+     * @param \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity    $scope The scope
      *
      * @return void
      */
@@ -62,7 +62,7 @@ interface AuthCodeInterface extends StorageInterface
     /**
      * Delete an access token
      *
-     * @param \League\OAuth2\Server\Entity\AuthCodeEntity $token The access token to delete
+     * @param \Whitehatsleague\OAuth2\Server\Entity\AuthCodeEntity $token The access token to delete
      *
      * @return void
      */

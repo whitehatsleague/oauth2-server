@@ -9,9 +9,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Grant;
+namespace Whitehatsleague\OAuth2\Server\Grant;
 
-use League\OAuth2\Server\AuthorizationServer;
+use Whitehatsleague\OAuth2\Server\AuthorizationServer;
 
 /**
  * Grant type interface
@@ -44,7 +44,7 @@ interface GrantTypeInterface
     /**
      * Inject the authorization server into the grant
      *
-     * @param \League\OAuth2\Server\AuthorizationServer $server The authorization server instance
+     * @param \Whitehatsleague\OAuth2\Server\AuthorizationServer $server The authorization server instance
      *
      * @return self
      */

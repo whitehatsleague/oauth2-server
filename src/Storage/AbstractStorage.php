@@ -9,9 +9,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Storage;
+namespace Whitehatsleague\OAuth2\Server\Storage;
 
-use League\OAuth2\Server\AbstractServer;
+use Whitehatsleague\OAuth2\Server\AbstractServer;
 
 /**
  * Abstract storage class
@@ -21,14 +21,14 @@ abstract class AbstractStorage implements StorageInterface
     /**
      * Server
      *
-     * @var \League\OAuth2\Server\AbstractServer $server
+     * @var \Whitehatsleague\OAuth2\Server\AbstractServer $server
      */
     protected $server;
 
     /**
      * Set the server
      *
-     * @param \League\OAuth2\Server\AbstractServer $server
+     * @param \Whitehatsleague\OAuth2\Server\AbstractServer $server
      *
      * @return self
      */
@@ -42,7 +42,7 @@ abstract class AbstractStorage implements StorageInterface
     /**
      * Return the server
      *
-     * @return \League\OAuth2\Server\AbstractServer
+     * @return \Whitehatsleague\OAuth2\Server\AbstractServer
      */
     protected function getServer()
     {

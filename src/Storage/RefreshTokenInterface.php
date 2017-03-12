@@ -9,9 +9,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Storage;
+namespace Whitehatsleague\OAuth2\Server\Storage;
 
-use League\OAuth2\Server\Entity\RefreshTokenEntity;
+use Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity;
 
 /**
  * Refresh token interface
@@ -19,11 +19,11 @@ use League\OAuth2\Server\Entity\RefreshTokenEntity;
 interface RefreshTokenInterface extends StorageInterface
 {
     /**
-     * Return a new instance of \League\OAuth2\Server\Entity\RefreshTokenEntity
+     * Return a new instance of \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity
      *
      * @param string $token
      *
-     * @return \League\OAuth2\Server\Entity\RefreshTokenEntity | null
+     * @return \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity | null
      */
     public function get($token);
 
@@ -34,14 +34,14 @@ interface RefreshTokenInterface extends StorageInterface
      * @param integer $expireTime
      * @param string  $accessToken
      *
-     * @return \League\OAuth2\Server\Entity\RefreshTokenEntity
+     * @return \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity
      */
     public function create($token, $expireTime, $accessToken);
 
     /**
      * Delete the refresh token
      *
-     * @param \League\OAuth2\Server\Entity\RefreshTokenEntity $token
+     * @param \Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity $token
      *
      * @return void
      */

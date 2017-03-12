@@ -4,15 +4,15 @@
  *
  * @package     php-loep/oauth2-server
  * @author      Alex Bilbie <hello@alexbilbie.com>
- * @copyright   Copyright (c) 2013 PHP League of Extraordinary Packages
+ * @copyright   Copyright (c) 2013 PHP Whitehatsleague of Extraordinary Packages
  * @license     http://mit-license.org/
  * @link        http://github.com/php-loep/oauth2-server
  */
 
-namespace League\OAuth2\Server\Util;
+namespace Whitehatsleague\OAuth2\Server\Util;
 
-use League\OAuth2\Server\Util\KeyAlgorithm\DefaultAlgorithm;
-use League\OAuth2\Server\Util\KeyAlgorithm\KeyAlgorithmInterface;
+use Whitehatsleague\OAuth2\Server\Util\KeyAlgorithm\DefaultAlgorithm;
+use Whitehatsleague\OAuth2\Server\Util\KeyAlgorithm\KeyAlgorithmInterface;
 
 /**
  * SecureKey class

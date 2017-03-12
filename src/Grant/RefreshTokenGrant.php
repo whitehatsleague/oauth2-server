@@ -10,14 +10,14 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Grant;
+namespace Whitehatsleague\OAuth2\Server\Grant;
 
-use League\OAuth2\Server\Entity\AccessTokenEntity;
-use League\OAuth2\Server\Entity\ClientEntity;
-use League\OAuth2\Server\Entity\RefreshTokenEntity;
-use League\OAuth2\Server\Event;
-use League\OAuth2\Server\Exception;
-use League\OAuth2\Server\Util\SecureKey;
+use Whitehatsleague\OAuth2\Server\Entity\AccessTokenEntity;
+use Whitehatsleague\OAuth2\Server\Entity\ClientEntity;
+use Whitehatsleague\OAuth2\Server\Entity\RefreshTokenEntity;
+use Whitehatsleague\OAuth2\Server\Event;
+use Whitehatsleague\OAuth2\Server\Exception;
+use Whitehatsleague\OAuth2\Server\Util\SecureKey;
 
 /**
  * Refresh token grant

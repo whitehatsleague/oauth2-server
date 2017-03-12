@@ -9,17 +9,17 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server;
+namespace Whitehatsleague\OAuth2\Server;
 
 use League\Event\Emitter;
-use League\OAuth2\Server\Storage\AccessTokenInterface;
-use League\OAuth2\Server\Storage\AuthCodeInterface;
-use League\OAuth2\Server\Storage\ClientInterface;
-use League\OAuth2\Server\Storage\MacTokenInterface;
-use League\OAuth2\Server\Storage\RefreshTokenInterface;
-use League\OAuth2\Server\Storage\ScopeInterface;
-use League\OAuth2\Server\Storage\SessionInterface;
-use League\OAuth2\Server\TokenType\TokenTypeInterface;
+use Whitehatsleague\OAuth2\Server\Storage\AccessTokenInterface;
+use Whitehatsleague\OAuth2\Server\Storage\AuthCodeInterface;
+use Whitehatsleague\OAuth2\Server\Storage\ClientInterface;
+use Whitehatsleague\OAuth2\Server\Storage\MacTokenInterface;
+use Whitehatsleague\OAuth2\Server\Storage\RefreshTokenInterface;
+use Whitehatsleague\OAuth2\Server\Storage\ScopeInterface;
+use Whitehatsleague\OAuth2\Server\Storage\SessionInterface;
+use Whitehatsleague\OAuth2\Server\TokenType\TokenTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -37,61 +37,61 @@ abstract class AbstractServer
     /**
      * Session storage
      *
-     * @var \League\OAuth2\Server\Storage\SessionInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\SessionInterface
      */
     protected $sessionStorage;
 
     /**
      * Access token storage
      *
-     * @var \League\OAuth2\Server\Storage\AccessTokenInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\AccessTokenInterface
      */
     protected $accessTokenStorage;
 
     /**
      * Refresh token storage
      *
-     * @var \League\OAuth2\Server\Storage\RefreshTokenInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\RefreshTokenInterface
      */
     protected $refreshTokenStorage;
 
     /**
      * Auth code storage
      *
-     * @var \League\OAuth2\Server\Storage\AuthCodeInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\AuthCodeInterface
      */
     protected $authCodeStorage;
 
     /**
      * Scope storage
      *
-     * @var \League\OAuth2\Server\Storage\ScopeInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\ScopeInterface
      */
     protected $scopeStorage;
 
     /**
      * Client storage
      *
-     * @var \League\OAuth2\Server\Storage\ClientInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\ClientInterface
      */
     protected $clientStorage;
 
     /**
-     * @var \League\OAuth2\Server\Storage\MacTokenInterface
+     * @var \Whitehatsleague\OAuth2\Server\Storage\MacTokenInterface
      */
     protected $macStorage;
 
     /**
      * Token type
      *
-     * @var \League\OAuth2\Server\TokenType\TokenTypeInterface
+     * @var \Whitehatsleague\OAuth2\Server\TokenType\TokenTypeInterface
      */
     protected $tokenType;
 
     /**
      * Event emitter
      *
-     * @var \League\Event\Emitter
+     * @var \Whitehatsleague\Event\Emitter
      */
     protected $eventEmitter;
 
@@ -132,7 +132,7 @@ abstract class AbstractServer
     /**
      * Returns the event emitter
      *
-     * @return \League\Event\Emitter
+     * @return \Whitehatsleague\Event\Emitter
      */
     public function getEventEmitter()
     {
@@ -170,7 +170,7 @@ abstract class AbstractServer
     /**
      * Set the client storage
      *
-     * @param \League\OAuth2\Server\Storage\ClientInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\ClientInterface $storage
      *
      * @return self
      */
@@ -185,7 +185,7 @@ abstract class AbstractServer
     /**
      * Set the session storage
      *
-     * @param \League\OAuth2\Server\Storage\SessionInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\SessionInterface $storage
      *
      * @return self
      */
@@ -200,7 +200,7 @@ abstract class AbstractServer
     /**
      * Set the access token storage
      *
-     * @param \League\OAuth2\Server\Storage\AccessTokenInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\AccessTokenInterface $storage
      *
      * @return self
      */
@@ -215,7 +215,7 @@ abstract class AbstractServer
     /**
      * Set the refresh token storage
      *
-     * @param \League\OAuth2\Server\Storage\RefreshTokenInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\RefreshTokenInterface $storage
      *
      * @return self
      */
@@ -230,7 +230,7 @@ abstract class AbstractServer
     /**
      * Set the auth code storage
      *
-     * @param \League\OAuth2\Server\Storage\AuthCodeInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\AuthCodeInterface $storage
      *
      * @return self
      */
@@ -245,7 +245,7 @@ abstract class AbstractServer
     /**
      * Set the scope storage
      *
-     * @param \League\OAuth2\Server\Storage\ScopeInterface $storage
+     * @param \Whitehatsleague\OAuth2\Server\Storage\ScopeInterface $storage
      *
      * @return self
      */
@@ -260,7 +260,7 @@ abstract class AbstractServer
     /**
      * Return the client storage
      *
-     * @return \League\OAuth2\Server\Storage\ClientInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\ClientInterface
      */
     public function getClientStorage()
     {
@@ -270,7 +270,7 @@ abstract class AbstractServer
     /**
      * Return the scope storage
      *
-     * @return \League\OAuth2\Server\Storage\ScopeInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\ScopeInterface
      */
     public function getScopeStorage()
     {
@@ -280,7 +280,7 @@ abstract class AbstractServer
     /**
      * Return the session storage
      *
-     * @return \League\OAuth2\Server\Storage\SessionInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\SessionInterface
      */
     public function getSessionStorage()
     {
@@ -290,7 +290,7 @@ abstract class AbstractServer
     /**
      * Return the refresh token storage
      *
-     * @return \League\OAuth2\Server\Storage\RefreshTokenInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\RefreshTokenInterface
      */
     public function getRefreshTokenStorage()
     {
@@ -300,7 +300,7 @@ abstract class AbstractServer
     /**
      * Return the access token storage
      *
-     * @return \League\OAuth2\Server\Storage\AccessTokenInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\AccessTokenInterface
      */
     public function getAccessTokenStorage()
     {
@@ -310,7 +310,7 @@ abstract class AbstractServer
     /**
      * Return the auth code storage
      *
-     * @return \League\OAuth2\Server\Storage\AuthCodeInterface
+     * @return \Whitehatsleague\OAuth2\Server\Storage\AuthCodeInterface
      */
     public function getAuthCodeStorage()
     {

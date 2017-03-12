@@ -9,9 +9,9 @@
  * @link        https://github.com/thephpleague/oauth2-server
  */
 
-namespace League\OAuth2\Server\Storage;
+namespace Whitehatsleague\OAuth2\Server\Storage;
 
-use League\OAuth2\Server\Entity\SessionEntity;
+use Whitehatsleague\OAuth2\Server\Entity\SessionEntity;
 
 /**
  * Client storage interface
@@ -26,16 +26,16 @@ interface ClientInterface extends StorageInterface
      * @param string $redirectUri  The client's redirect URI (default = "null")
      * @param string $grantType    The grant type used (default = "null")
      *
-     * @return \League\OAuth2\Server\Entity\ClientEntity | null
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ClientEntity | null
      */
     public function get($clientId, $clientSecret = null, $redirectUri = null, $grantType = null);
 
     /**
      * Get the client associated with a session
      *
-     * @param \League\OAuth2\Server\Entity\SessionEntity $session The session
+     * @param \Whitehatsleague\OAuth2\Server\Entity\SessionEntity $session The session
      *
-     * @return \League\OAuth2\Server\Entity\ClientEntity | null
+     * @return \Whitehatsleague\OAuth2\Server\Entity\ClientEntity | null
      */
     public function getBySession(SessionEntity $session);
 }
