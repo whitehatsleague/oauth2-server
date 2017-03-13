@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Client Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidClientException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class InvalidClientException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_client';
+    public $errorMessage = 'Client authentication failed.';
 
     /**
      * {@inheritdoc}
@@ -33,4 +36,5 @@ class InvalidClientException extends OAuthException
     {
         parent::__construct('Client authentication failed.');
     }
+
 }

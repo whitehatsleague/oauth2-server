@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Unsupported Response Type Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class UnsupportedResponseTypeException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class UnsupportedResponseTypeException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'unsupported_response_type';
+    public $errorMessage = 'The authorization server does not support obtaining an access token using this method.';
 
     /**
      * {@inheritdoc}
@@ -35,4 +38,5 @@ class UnsupportedResponseTypeException extends OAuthException
         parent::__construct('The authorization server does not support obtaining an access token using this method.');
         $this->redirectUri = $redirectUri;
     }
+
 }

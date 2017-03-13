@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Refresh Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidRefreshException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class InvalidRefreshException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_request';
+    public $errorMessage = 'The refresh token is invalid.';
 
     /**
      * {@inheritdoc}
@@ -33,4 +36,5 @@ class InvalidRefreshException extends OAuthException
     {
         parent::__construct('The refresh token is invalid.');
     }
+
 }

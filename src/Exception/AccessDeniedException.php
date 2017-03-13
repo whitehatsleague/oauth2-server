@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Access Denied Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class AccessDeniedException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class AccessDeniedException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'access_denied';
+    public $errorMessage = 'The resource owner or authorization server denied the request.';
 
     /**
      * {@inheritdoc}
@@ -33,4 +36,5 @@ class AccessDeniedException extends OAuthException
     {
         parent::__construct('The resource owner or authorization server denied the request.');
     }
+
 }

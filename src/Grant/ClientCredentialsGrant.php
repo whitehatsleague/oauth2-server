@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Client credentials grant
  *
@@ -23,6 +24,7 @@ use Whitehatsleague\OAuth2\Server\Util\SecureKey;
  */
 class ClientCredentialsGrant extends AbstractGrant
 {
+
     /**
      * Grant identifier
      *
@@ -63,26 +65,25 @@ class ClientCredentialsGrant extends AbstractGrant
         // Get the required params
         $clientId = $this->server->getRequest()->request->get('clientId', $this->server->getRequest()->getUser());
         if (is_null($clientId)) {
-            throw new Exception\InvalidRequestException('clientId');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientId');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
-        $clientSecret = $this->server->getRequest()->request->get('clientSecret',
-            $this->server->getRequest()->getPassword());
+        $clientSecret = $this->server->getRequest()->request->get('clientSecret', $this->server->getRequest()->getPassword());
         if (is_null($clientSecret)) {
-            throw new Exception\InvalidRequestException('clientSecret');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientSecret');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate client ID and client secret
         $client = $this->server->getClientStorage()->get(
-            $clientId,
-            $clientSecret,
-            null,
-            $this->getIdentifier()
+                $clientId, $clientSecret, null, $this->getIdentifier()
         );
 
         if (($client instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidClientException();
+            $InvalidClientException = new Exception\InvalidClientException();
+            abort($InvalidClientException->httpStatusCode, $InvalidClientException->errorMessage);
         }
 
         // Validate any scopes that are in the request
@@ -119,4 +120,5 @@ class ClientCredentialsGrant extends AbstractGrant
 
         return $this->server->getTokenType()->generateResponse();
     }
+
 }

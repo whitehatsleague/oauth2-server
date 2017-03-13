@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Resource Server
  *
@@ -26,6 +27,7 @@ use Whitehatsleague\OAuth2\Server\TokenType\MAC;
  */
 class ResourceServer extends AbstractServer
 {
+
     /**
      * The access token
      *
@@ -51,11 +53,9 @@ class ResourceServer extends AbstractServer
      * @return self
      */
     public function __construct(
-        SessionInterface $sessionStorage,
-        AccessTokenInterface $accessTokenStorage,
-        ClientInterface $clientStorage,
-        ScopeInterface $scopeStorage
-    ) {
+    SessionInterface $sessionStorage, AccessTokenInterface $accessTokenStorage, ClientInterface $clientStorage, ScopeInterface $scopeStorage
+    )
+    {
         $this->setSessionStorage($sessionStorage);
         $this->setAccessTokenStorage($accessTokenStorage);
         $this->setClientStorage($clientStorage);
@@ -106,22 +106,22 @@ class ResourceServer extends AbstractServer
      */
     public function isValidRequest($headerOnly = true, $accessToken = null)
     {
-        $accessTokenString = ($accessToken !== null)
-                                ? $accessToken
-                                : $this->determineAccessToken($headerOnly);
+        $accessTokenString = ($accessToken !== null) ? $accessToken : $this->determineAccessToken($headerOnly);
 
         // Set the access token
         $this->accessToken = $this->getAccessTokenStorage()->get($accessTokenString);
 
         // Ensure the access token exists
         if (!$this->accessToken instanceof AccessTokenEntity) {
-            throw new AccessDeniedException();
+            $AccessDeniedException = new AccessDeniedException();
+            abort($AccessDeniedException->httpStatusCode, $AccessDeniedException->errorMessage);
         }
 
         // Check the access token hasn't expired
         // Ensure the auth code hasn't expired
         if ($this->accessToken->isExpired() === true) {
-            throw new AccessDeniedException();
+            $AccessDeniedException = new AccessDeniedException();
+            abort($AccessDeniedException->httpStatusCode,$AccessDeniedException->errorMessage); 
         }
 
         return true;
@@ -140,16 +140,16 @@ class ResourceServer extends AbstractServer
     {
         if (!empty($this->getRequest()->headers->get('Authorization'))) {
             $accessToken = $this->getTokenType()->determineAccessTokenInHeader($this->getRequest());
-        } elseif ($headerOnly === false && (! $this->getTokenType() instanceof MAC)) {
-            $accessToken = ($this->getRequest()->server->get('REQUEST_METHOD') === 'GET')
-                                ? $this->getRequest()->query->get($this->tokenKey)
-                                : $this->getRequest()->request->get($this->tokenKey);
+        } elseif ($headerOnly === false && (!$this->getTokenType() instanceof MAC)) {
+            $accessToken = ($this->getRequest()->server->get('REQUEST_METHOD') === 'GET') ? $this->getRequest()->query->get($this->tokenKey) : $this->getRequest()->request->get($this->tokenKey);
         }
 
         if (empty($accessToken)) {
-            throw new InvalidRequestException('access token');
+            $InvalidRequestException = new InvalidRequestException('access token');
+            abort($InvalidRequestException->httpStatusCode,$InvalidRequestException->errorMessage); 
         }
 
         return $accessToken;
     }
+
 }

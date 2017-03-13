@@ -121,12 +121,14 @@ class RefreshTokenGrant extends AbstractGrant
     {
         $clientId = $this->server->getRequest()->request->get('clientId', $this->server->getRequest()->getUser());
         if (is_null($clientId)) {
-            throw new Exception\InvalidRequestException('clientId');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientId');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $clientSecret = $this->server->getRequest()->request->get('clientSecret', $this->server->getRequest()->getPassword());
         if ($this->shouldRequireClientSecret() && is_null($clientSecret)) {
-            throw new Exception\InvalidRequestException('clientSecret');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientSecret');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate client ID and client secret
@@ -136,24 +138,28 @@ class RefreshTokenGrant extends AbstractGrant
 
         if (($client instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidClientException();
+            $InvalidClientException = new Exception\InvalidClientException();
+            abort($InvalidClientException->httpStatusCode, $InvalidClientException->errorMessage);
         }
 
         $oldRefreshTokenParam = $this->server->getRequest()->request->get('refreshToken', null);
         if ($oldRefreshTokenParam === null) {
-            throw new Exception\InvalidRequestException('refreshToken');
+            $InvalidRequestException = new Exception\InvalidRequestException('refreshToken');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate refresh token
         $oldRefreshToken = $this->server->getRefreshTokenStorage()->get($oldRefreshTokenParam);
 
         if (($oldRefreshToken instanceof RefreshTokenEntity) === false) {
-            throw new Exception\InvalidRefreshException();
+            $InvalidRefreshException = new Exception\InvalidRefreshException();
+            abort($InvalidRefreshException->httpStatusCode, $InvalidRefreshException->errorMessage);
         }
 
         // Ensure the old refresh token hasn't expired
         if ($oldRefreshToken->isExpired() === true) {
-            throw new Exception\InvalidRefreshException();
+            $InvalidRefreshException = new Exception\InvalidRefreshException();
+            abort($InvalidRefreshException->httpStatusCode, $InvalidRefreshException->errorMessage);
         }
 
         $oldAccessToken = $oldRefreshToken->getAccessToken();
@@ -174,7 +180,8 @@ class RefreshTokenGrant extends AbstractGrant
             //  the request doesn't include any new scopes
             foreach ($requestedScopes as $requestedScope) {
                 if (!isset($scopes[$requestedScope->getId()])) {
-                    throw new Exception\InvalidScopeException($requestedScope->getId());
+                    $InvalidScopeException = new Exception\InvalidScopeException($requestedScope->getId());
+                    abort($InvalidScopeException->httpStatusCode, $InvalidScopeException->errorMessage);
                 }
             }
 

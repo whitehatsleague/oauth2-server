@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Grant Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidGrantException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,19 +27,23 @@ class InvalidGrantException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_grant';
+    public $errorMessage = '';
 
     /**
      * {@inheritdoc}
      */
-
     public function __construct($parameter)
     {
+        $this->errorMessage = sprintf(
+                'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. Check the "%s" parameter.', $parameter
+        );
+
         $this->parameter = $parameter;
         parent::__construct(
-            sprintf(
-                'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. Check the "%s" parameter.',
-                $parameter
-            )
+                sprintf(
+                        'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. Check the "%s" parameter.', $parameter
+                )
         );
     }
+
 }

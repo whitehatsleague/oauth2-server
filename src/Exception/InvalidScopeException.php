@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Scope Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidScopeException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,21 +27,21 @@ class InvalidScopeException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_scope';
+    public $errorMessage = 'The requested scope is invalid, unknown, or malformed. Check the scope.';
 
     /**
      * {@inheritdoc}
      */
-
     public function __construct($parameter, $redirectUri = null)
     {
         $this->parameter = $parameter;
         parent::__construct(
-            sprintf(
-                'The requested scope is invalid, unknown, or malformed. Check the "%s" scope.',
-                $parameter
-            )
+                sprintf(
+                        'The requested scope is invalid, unknown, or malformed. Check the "%s" scope.', $parameter
+                )
         );
 
         $this->redirectUri = $redirectUri;
     }
+
 }

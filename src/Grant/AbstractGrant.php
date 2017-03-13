@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Abstract grant
  *
@@ -21,6 +22,7 @@ use Whitehatsleague\OAuth2\Server\Exception;
  */
 abstract class AbstractGrant implements GrantTypeInterface
 {
+
     /**
      * Grant identifier
      *
@@ -144,11 +146,10 @@ abstract class AbstractGrant implements GrantTypeInterface
         }
 
         if (
-            $this->server->scopeParamRequired() === true
-            && $this->server->getDefaultScope() === null
-            && count($scopesList) === 0
+                $this->server->scopeParamRequired() === true && $this->server->getDefaultScope() === null && count($scopesList) === 0
         ) {
-            throw new Exception\InvalidRequestException('scope');
+            $InvalidRequestException = new Exception\InvalidRequestException('scope');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         } elseif (count($scopesList) === 0 && $this->server->getDefaultScope() !== null) {
             if (is_array($this->server->getDefaultScope())) {
                 $scopesList = $this->server->getDefaultScope();
@@ -161,13 +162,12 @@ abstract class AbstractGrant implements GrantTypeInterface
 
         foreach ($scopesList as $scopeItem) {
             $scope = $this->server->getScopeStorage()->get(
-                $scopeItem,
-                $this->getIdentifier(),
-                $client->getId()
+                    $scopeItem, $this->getIdentifier(), $client->getId()
             );
 
             if (($scope instanceof ScopeEntity) === false) {
-                throw new Exception\InvalidScopeException($scopeItem, $redirectUri);
+                $InvalidScopeException = new Exception\InvalidScopeException($scopeItem, $redirectUri);
+                abort($InvalidScopeException->httpStatusCode, $InvalidScopeException->errorMessage);
             }
 
             $scopes[$scope->getId()] = $scope;
@@ -194,4 +194,5 @@ abstract class AbstractGrant implements GrantTypeInterface
 
         return $scopes;
     }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Credentials Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidCredentialsException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class InvalidCredentialsException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_credentials';
+    public $errorMessage = 'The user credentials were incorrect.';
 
     /**
      * {@inheritdoc}
@@ -33,4 +36,5 @@ class InvalidCredentialsException extends OAuthException
     {
         parent::__construct('The user credentials were incorrect.');
     }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Request Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class UnsupportedGrantTypeException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,19 +27,19 @@ class UnsupportedGrantTypeException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'unsupported_grant_type';
+    public $errorMessage = 'The authorization grant type is not supported by the authorization server.';
 
     /**
      * {@inheritdoc}
      */
-
     public function __construct($parameter)
     {
         $this->parameter = $parameter;
         parent::__construct(
-            sprintf(
-                'The authorization grant type "%s" is not supported by the authorization server.',
-                $parameter
-            )
+                sprintf(
+                        'The authorization grant type "%s" is not supported by the authorization server.', $parameter
+                )
         );
     }
+
 }

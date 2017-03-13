@@ -76,7 +76,8 @@ class PasswordGrant extends AbstractGrant
     protected function getVerifyCredentialsCallback()
     {
         if (is_null($this->callback) || !is_callable($this->callback)) {
-            throw new Exception\ServerErrorException('Null or non-callable callback set on Password grant');
+            $ServerErrorException = new Exception\ServerErrorException('Null or non-callable callback set on Password grant');
+            abort($ServerErrorException->httpStatusCode, $ServerErrorException->errorMessage);
         }
 
         return $this->callback;
@@ -94,12 +95,14 @@ class PasswordGrant extends AbstractGrant
         // Get the required params
         $clientId = $this->server->getRequest()->request->get('clientId', $this->server->getRequest()->getUser());
         if (is_null($clientId)) {
-            throw new Exception\InvalidRequestException('clientId');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientId');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $clientSecret = $this->server->getRequest()->request->get('clientSecret', $this->server->getRequest()->getPassword());
         if (is_null($clientSecret)) {
-            throw new Exception\InvalidRequestException('clientSecret');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientSecret');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate client ID and client secret
@@ -109,17 +112,20 @@ class PasswordGrant extends AbstractGrant
 
         if (($client instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidClientException();
+            $InvalidClientException = new Exception\InvalidClientException();
+            abort($InvalidClientException->httpStatusCode, $InvalidClientException->errorMessage);
         }
 
         $username = $this->server->getRequest()->request->get('username', null);
         if (is_null($username)) {
-            throw new Exception\InvalidRequestException('username');
+            $InvalidRequestException = new Exception\InvalidRequestException('username');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $password = $this->server->getRequest()->request->get('password', null);
         if (is_null($password)) {
-            throw new Exception\InvalidRequestException('password');
+            $InvalidRequestException = new Exception\InvalidRequestException('password');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Check if user's username and password are correct
@@ -127,7 +133,8 @@ class PasswordGrant extends AbstractGrant
 
         if ($userId === false) {
             $this->server->getEventEmitter()->emit(new Event\UserAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidCredentialsException();
+            $InvalidCredentialsException = new Exception\InvalidCredentialsException();
+            abort($InvalidCredentialsException->httpStatusCode, $InvalidCredentialsException->errorMessage);
         }
 
         // Validate any scopes that are in the request

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Unauthorized Client Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class UnauthorizedClientException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class UnauthorizedClientException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'unauthorized_client';
+    public $errorMessage = 'The client is not authorized to request an access token using this method.';
 
     /**
      * {@inheritdoc}
@@ -33,4 +36,5 @@ class UnauthorizedClientException extends OAuthException
     {
         parent::__construct('The client is not authorized to request an access token using this method.');
     }
+
 }

@@ -115,12 +115,14 @@ class AuthCodeGrant extends AbstractGrant
         // Get required params
         $clientId = $this->server->getRequest()->query->get('clientId', null);
         if (is_null($clientId)) {
-            throw new Exception\InvalidRequestException('clientId');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientId');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $redirectUri = $this->server->getRequest()->query->get('redirectUri', null);
         if (is_null($redirectUri)) {
-            throw new Exception\InvalidRequestException('redirectUri');
+            $InvalidRequestException = new Exception\InvalidRequestException('redirectUri');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate client ID and redirect URI
@@ -130,22 +132,26 @@ class AuthCodeGrant extends AbstractGrant
 
         if (($client instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidClientException();
+            $InvalidClientException = new Exception\InvalidClientException();
+            abort($InvalidClientException->httpStatusCode, $InvalidClientException->errorMessage);
         }
 
         $state = $this->server->getRequest()->query->get('state', null);
         if ($this->server->stateParamRequired() === true && is_null($state)) {
-            throw new Exception\InvalidRequestException('state', $redirectUri);
+            $InvalidRequestException = new Exception\InvalidRequestException('state', $redirectUri);
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $responseType = $this->server->getRequest()->query->get('responseType', null);
         if (is_null($responseType)) {
-            throw new Exception\InvalidRequestException('responseType', $redirectUri);
+            $InvalidRequestException = new Exception\InvalidRequestException('responseType', $redirectUri);
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Ensure response type is one that is recognised
         if (!in_array($responseType, $this->server->getResponseTypes())) {
-            throw new Exception\UnsupportedResponseTypeException($responseType, $redirectUri);
+            $UnsupportedResponseTypeException = new Exception\UnsupportedResponseTypeException($responseType, $redirectUri);
+            abort($UnsupportedResponseTypeException->httpStatusCode, $UnsupportedResponseTypeException->errorMessage);
         }
 
         // Validate any scopes that are in the request
@@ -207,17 +213,20 @@ class AuthCodeGrant extends AbstractGrant
         // Get the required params
         $clientId = $this->server->getRequest()->request->get('clientId', $this->server->getRequest()->getUser());
         if (is_null($clientId)) {
-            throw new Exception\InvalidRequestException('clientId');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientId');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $clientSecret = $this->server->getRequest()->request->get('clientSecret', $this->server->getRequest()->getPassword());
         if ($this->shouldRequireClientSecret() && is_null($clientSecret)) {
-            throw new Exception\InvalidRequestException('clientSecret');
+            $InvalidRequestException = new Exception\InvalidRequestException('clientSecret');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $redirectUri = $this->server->getRequest()->request->get('redirectUri', null);
         if (is_null($redirectUri)) {
-            throw new Exception\InvalidRequestException('redirectUri');
+            $InvalidRequestException = new Exception\InvalidRequestException('redirectUri');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Validate client ID and client secret
@@ -227,28 +236,33 @@ class AuthCodeGrant extends AbstractGrant
 
         if (($client instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
-            throw new Exception\InvalidClientException();
+            $InvalidClientException = new Exception\InvalidClientException();
+            abort($InvalidClientException->httpStatusCode, $InvalidClientException->errorMessage);
         }
 
         // Validate the auth code
         $authCode = $this->server->getRequest()->request->get('code', null);
         if (is_null($authCode)) {
-            throw new Exception\InvalidRequestException('code');
+            $InvalidRequestException = new Exception\InvalidRequestException('code');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $code = $this->server->getAuthCodeStorage()->get($authCode);
         if (($code instanceof AuthCodeEntity) === false) {
-            throw new Exception\InvalidRequestException('code');
+            $InvalidRequestException = new Exception\InvalidRequestException('code');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Ensure the auth code hasn't expired
         if ($code->isExpired() === true) {
-            throw new Exception\InvalidRequestException('code');
+            $InvalidRequestException = new Exception\InvalidRequestException('code');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Check redirect URI presented matches redirect URI originally used in authorize request
         if ($code->getRedirectUri() !== $redirectUri) {
-            throw new Exception\InvalidRequestException('redirectUri');
+            $InvalidRequestException = new Exception\InvalidRequestException('redirectUri');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         $session = $code->getSession();

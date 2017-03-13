@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Base Exception
  *
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class OAuthException extends \Exception
 {
+
     /**
      * The HTTP status code for this exception that should be sent in the response
      */
@@ -35,6 +37,7 @@ class OAuthException extends \Exception
      * The exception type
      */
     public $errorType = '';
+    public $errorMessge = 'An error occured';
 
     /**
      * Parameter eventually passed to Exception
@@ -69,11 +72,10 @@ class OAuthException extends \Exception
     public function getRedirectUri()
     {
         return RedirectUri::make(
-            $this->redirectUri,
-            [
-                'error' =>  $this->errorType,
-                'message' =>  $this->getMessage(),
-            ]
+                        $this->redirectUri, [
+                    'error' => $this->errorType,
+                    'message' => $this->getMessage(),
+                        ]
         );
     }
 
@@ -136,10 +138,11 @@ class OAuthException extends \Exception
                 }
             }
             if ($authScheme !== null) {
-                $headers[] = 'WWW-Authenticate: '.$authScheme.' realm=""';
+                $headers[] = 'WWW-Authenticate: ' . $authScheme . ' realm=""';
             }
         }
         // @codeCoverageIgnoreEnd
         return $headers;
     }
+
 }

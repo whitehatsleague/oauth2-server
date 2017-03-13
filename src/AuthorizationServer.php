@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Authorization Server
  *
@@ -19,6 +20,7 @@ use Whitehatsleague\OAuth2\Server\TokenType\Bearer;
  */
 class AuthorizationServer extends AbstractServer
 {
+
     /**
      * The delimiter between scopes specified in the scope query string parameter
      * The OAuth 2 specification states it should be a space but most use a comma
@@ -263,12 +265,14 @@ class AuthorizationServer extends AbstractServer
     {
         $grantType = $this->getRequest()->request->get('grantType');
         if (is_null($grantType)) {
-            throw new Exception\InvalidRequestException('grantType');
+            $InvalidRequestException = new Exception\InvalidRequestException('grantType');
+            abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
         // Ensure grant type is one that is recognised and is enabled
         if (!in_array($grantType, array_keys($this->grantTypes))) {
-            throw new Exception\UnsupportedGrantTypeException($grantType);
+            $UnsupportedGrantTypeException = new Exception\UnsupportedGrantTypeException($grantType);
+            abort($UnsupportedGrantTypeException->httpStatusCode, $UnsupportedGrantTypeException->errorMessage);
         }
 
         // Complete the flow
@@ -290,6 +294,8 @@ class AuthorizationServer extends AbstractServer
             return $this->grantTypes[$grantType];
         }
 
-        throw new Exception\InvalidGrantException($grantType);
+        $InvalidGrantException = new Exception\InvalidGrantException($grantType);
+        abort($InvalidGrantException->httpStatusCode, $InvalidGrantException->errorMessage);
     }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Invalid Request Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class InvalidRequestException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,21 +27,25 @@ class InvalidRequestException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'invalid_request';
+    public $errorMessage = '';
 
     /**
      * {@inheritdoc}
      */
-
     public function __construct($parameter, $redirectUri = null)
     {
+        $this->errorMessage = sprintf(
+                'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the "%s" parameter.', $parameter
+        );
+
         $this->parameter = $parameter;
         parent::__construct(
-            sprintf(
-                'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the "%s" parameter.',
-                $parameter
-            )
+                sprintf(
+                        'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the "%s" parameter.', $parameter
+                )
         );
 
         $this->redirectUri = $redirectUri;
     }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Server Error Exception
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Exception;
  */
 class ServerErrorException extends OAuthException
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +27,7 @@ class ServerErrorException extends OAuthException
      * {@inheritdoc}
      */
     public $errorType = 'server_error';
+    public $errorMessage = 'The authorization server encountered an unexpected condition which prevented it from fulfilling the request.';
 
     /**
      * {@inheritdoc}
@@ -34,6 +37,6 @@ class ServerErrorException extends OAuthException
         $this->parameter = $parameter;
         $parameter = is_null($parameter) ? 'The authorization server encountered an unexpected condition which prevented it from fulfilling the request.' : $parameter;
         parent::__construct($parameter);
-
     }
+
 }
