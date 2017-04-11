@@ -129,8 +129,7 @@ class PasswordGrant extends AbstractGrant
         }
 
         // Check if user's username and password are correct
-        $userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password);
-
+		$userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $this->server->getRequest()->request->all());
         if ($userId === false) {
             $this->server->getEventEmitter()->emit(new Event\UserAuthenticationFailedEvent($this->server->getRequest()));
             $InvalidCredentialsException = new Exception\InvalidCredentialsException();
