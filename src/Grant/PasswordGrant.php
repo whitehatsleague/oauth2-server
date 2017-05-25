@@ -129,15 +129,19 @@ class PasswordGrant extends AbstractGrant
         }
 
         // Check if user's username and password are correct
-		$userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $this->server->getRequest()->request->all());
+        $userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $this->server->getRequest()->request->all());
         if ($userId === false) {
             $this->server->getEventEmitter()->emit(new Event\UserAuthenticationFailedEvent($this->server->getRequest()));
             $InvalidCredentialsException = new Exception\InvalidCredentialsException();
             abort($InvalidCredentialsException->httpStatusCode, $InvalidCredentialsException->errorMessage);
         }
 
-        // Validate any scopes that are in the request
-        $scopeParam = $this->server->getRequest()->request->get('scope', '');
+        // Validate any clientId that are in the request
+        $clientId = $this->server->getRequest()->request->get('clientId');
+        // Validate any scopes against spesific client
+        $scopeParam = \App\Models\ClientScopesSettingsModel::getClientScopes($clientId);
+
+
         $scopes = $this->validateScopes($scopeParam, $client);
 
         // Create a new session
