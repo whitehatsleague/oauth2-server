@@ -188,7 +188,7 @@ class PasswordGrant extends AbstractGrant
         }
 
         //Check that user login with valid credentials from third party
-        if ($userLoginRequest['signUpSourceId'] == 2 || $userLoginRequest['signUpSourceId'] == 3) {
+        if (isset($userLoginRequest['signUpSourceId']) && ($userLoginRequest['signUpSourceId'] == 2 || $userLoginRequest['signUpSourceId'] == 3)) {
             $userLoginRequest['oauthToken'] = $accessToken->getId();
             AppEvent::fire(new LoginEvent($userLoginRequest));
         }
