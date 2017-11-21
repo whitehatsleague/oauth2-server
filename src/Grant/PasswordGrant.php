@@ -19,6 +19,8 @@ use Whitehatsleague\OAuth2\Server\Entity\SessionEntity;
 use Whitehatsleague\OAuth2\Server\Event;
 use Whitehatsleague\OAuth2\Server\Exception;
 use Whitehatsleague\OAuth2\Server\Util\SecureKey;
+use App\Events\LoginEvent;
+use Illuminate\Support\Facades\Event AS AppEvent;
 
 /**
  * Password grant class
@@ -128,8 +130,10 @@ class PasswordGrant extends AbstractGrant
             abort($InvalidRequestException->httpStatusCode, $InvalidRequestException->errorMessage);
         }
 
+        //Get the request of user
+        $userLoginRequest = $this->server->getRequest()->request->all();
         // Check if user's username and password are correct
-        $userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $this->server->getRequest()->request->all());
+        $userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $userLoginRequest);
         if ($userId === false) {
             $this->server->getEventEmitter()->emit(new Event\UserAuthenticationFailedEvent($this->server->getRequest()));
             $InvalidCredentialsException = new Exception\InvalidCredentialsException();
@@ -140,8 +144,6 @@ class PasswordGrant extends AbstractGrant
         $clientId = $this->server->getRequest()->request->get('clientId');
         // Validate any scopes against spesific client
         $scopeParam = \App\Models\ClientScopesSettingsModel::getClientScopes($clientId);
-
-
         $scopes = $this->validateScopes($scopeParam, $client);
 
         // Create a new session
@@ -183,6 +185,12 @@ class PasswordGrant extends AbstractGrant
         if ($this->server->hasGrantType('refreshToken')) {
             $refreshToken->setAccessToken($accessToken);
             $refreshToken->save();
+        }
+
+        //Check that user login with valid credentials from third party
+        if ($userLoginRequest['signUpSourceId'] == 2 || $userLoginRequest['signUpSourceId'] == 3) {
+            $userLoginRequest['oauthToken'] = $accessToken->getId();
+            AppEvent::fire(new LoginEvent($userLoginRequest));
         }
 
         return $this->server->getTokenType()->generateResponse();
