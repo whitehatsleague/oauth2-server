@@ -133,8 +133,8 @@ class PasswordGrant extends AbstractGrant
         //Get the request of user
         $userLoginRequest = $this->server->getRequest()->request->all();
         // Check if user's username and password are correct
-        $userId = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $userLoginRequest);
-        if ($userId === false) {
+        $userInfo = call_user_func($this->getVerifyCredentialsCallback(), $username, $password, $userLoginRequest);
+        if ($userInfo === false) {
             $this->server->getEventEmitter()->emit(new Event\UserAuthenticationFailedEvent($this->server->getRequest()));
             $InvalidCredentialsException = new Exception\InvalidCredentialsException();
             abort($InvalidCredentialsException->httpStatusCode, $InvalidCredentialsException->errorMessage);
@@ -148,7 +148,7 @@ class PasswordGrant extends AbstractGrant
 
         // Create a new session
         $session = new SessionEntity($this->server);
-        $session->setOwner('user', $userId);
+        $session->setOwner('user', $userInfo['id']);
         $session->associateClient($client);
 
         // Generate an access token
@@ -168,6 +168,7 @@ class PasswordGrant extends AbstractGrant
         $this->server->getTokenType()->setSession($session);
         $this->server->getTokenType()->setParam('accessToken', $accessToken->getId());
         $this->server->getTokenType()->setParam('expiresIn', $this->getAccessTokenTTL());
+        $this->server->getTokenType()->setParam('userInfo', $userInfo);
 
         // Associate a refresh token if set
         if ($this->server->hasGrantType('refreshToken')) {
