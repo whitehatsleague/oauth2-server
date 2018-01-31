@@ -76,9 +76,9 @@ class AccessTokenEntity extends AbstractTokenEntity
         );
 
         // Associate the scope with the token
-        foreach ($this->getScopes() as $scope) {
-            $this->server->getAccessTokenStorage()->associateScope($this, $scope);
-        }
+//        foreach ($this->getScopes() as $scope) {
+//            $this->server->getAccessTokenStorage()->associateScope($this, $scope);
+//        }
 
         return $this;
     }
