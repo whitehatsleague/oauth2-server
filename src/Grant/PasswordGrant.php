@@ -143,9 +143,8 @@ class PasswordGrant extends AbstractGrant
         // Validate any clientId that are in the request
         $clientId = $this->server->getRequest()->request->get('clientId');
         // Validate any scopes against spesific client
-        $scopeParam = \App\Models\ClientScopesSettingsModel::getClientScopes($clientId);
-        $scopes = $this->validateScopes($scopeParam, $client);
-
+//        $scopeParam = \App\Models\ClientScopesSettingsModel::getClientScopes($clientId);
+//        $scopes = $this->validateScopes($scopeParam, $client);
         // Create a new session
         $session = new SessionEntity($this->server);
         $session->setOwner('user', $userInfo['id']);
@@ -157,13 +156,12 @@ class PasswordGrant extends AbstractGrant
         $accessToken->setExpireTime($this->getAccessTokenTTL() + time());
 
         // Associate scopes with the session and access token
-        foreach ($scopes as $scope) {
-            $session->associateScope($scope);
-        }
-
-        foreach ($session->getScopes() as $scope) {
-            $accessToken->associateScope($scope);
-        }
+//        foreach ($scopes as $scope) {
+//            $session->associateScope($scope);
+//        }
+//        foreach ($session->getScopes() as $scope) {
+//            $accessToken->associateScope($scope);
+//        }
 
         $this->server->getTokenType()->setSession($session);
         $this->server->getTokenType()->setParam('accessToken', $accessToken->getId());

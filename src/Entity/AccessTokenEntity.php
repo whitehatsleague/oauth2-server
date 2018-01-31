@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Access token entity
  *
@@ -16,6 +17,7 @@ namespace Whitehatsleague\OAuth2\Server\Entity;
  */
 class AccessTokenEntity extends AbstractTokenEntity
 {
+
     /**
      * Get session
      *
@@ -39,10 +41,10 @@ class AccessTokenEntity extends AbstractTokenEntity
      *
      * @return bool
      */
-    public function hasScope($scope)
+    public function hasScope($scope, $clientId)
     {
         if ($this->scopes === null) {
-            $this->getScopes();
+            $this->getScopes($clientId);
         }
 
         return isset($this->scopes[$scope]);
@@ -53,11 +55,11 @@ class AccessTokenEntity extends AbstractTokenEntity
      *
      * @return \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[]
      */
-    public function getScopes()
+    public function getScopes($clientId)
     {
         if ($this->scopes === null) {
             $this->scopes = $this->formatScopes(
-                $this->server->getAccessTokenStorage()->getScopes($this)
+                    $this->server->getAccessTokenStorage()->getScopes($this, $clientId)
             );
         }
 
@@ -70,9 +72,7 @@ class AccessTokenEntity extends AbstractTokenEntity
     public function save()
     {
         $this->server->getAccessTokenStorage()->create(
-            $this->getId(),
-            $this->getExpireTime(),
-            $this->getSession()->getId()
+                $this->getId(), $this->getExpireTime(), $this->getSession()->getId()
         );
 
         // Associate the scope with the token
@@ -90,4 +90,5 @@ class AccessTokenEntity extends AbstractTokenEntity
     {
         $this->server->getAccessTokenStorage()->delete($this);
     }
+
 }
