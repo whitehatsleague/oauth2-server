@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OAuth 2.0 Access token storage interface
  *
@@ -19,6 +20,7 @@ use Whitehatsleague\OAuth2\Server\Entity\ScopeEntity;
  */
 interface AccessTokenInterface extends StorageInterface
 {
+
     /**
      * Get an instance of Entity\AccessTokenEntity
      *
@@ -35,7 +37,7 @@ interface AccessTokenInterface extends StorageInterface
      *
      * @return \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity[] Array of \Whitehatsleague\OAuth2\Server\Entity\ScopeEntity
      */
-    public function getScopes(AccessTokenEntity $token);
+    public function getScopes(AccessTokenEntity $token, $clientId);
 
     /**
      * Creates a new access token
